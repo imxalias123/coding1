@@ -254,7 +254,7 @@ app.put("/todos/:todoId/", async (request, response) => {
             } else{
                 response.status(400);
                 response.send("Invalid Todo Status")
-            };
+            }
             break;
         
         case requestData.priority !== undefined:
@@ -270,7 +270,7 @@ app.put("/todos/:todoId/", async (request, response) => {
             } else{
                 response.status(400);
                 response.send("Invalid Todo Priority")
-            };
+            }
             break;   
         
         case requestData.todo !== undefined:
@@ -325,7 +325,7 @@ app.put("/todos/:todoId/", async (request, response) => {
 app.delete("/todos/:todoId/", async (request, response) => {
     const {todoId} = request.params;
     const deleteTodoQuery = `
-    SELECT * FROM todo WHERE id = ${todoId};`;
+    DELETE FROM todo WHERE id = ${todoId};`;
     await db.run(deleteTodoQuery);
     response.send("Todo Deleted");
 });
