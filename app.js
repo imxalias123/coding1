@@ -199,7 +199,7 @@ app.post("/todos/", async (request, response) => {
     const {id, todo, priority, status, category, dueDate} = request.body;
     if (priority==="HIGH" || priority==="MEDIUM" || priority==="LOW"){
         if (status==="TO DO" || status==="IN PROGRESS" || status==="DONE") {
-            if (category==="WORK" && category==="HOME" && category==="LEARNING") {
+            if (category==="WORK" || category==="HOME" || category==="LEARNING") {
                 if (isMatch(dueDate, "yyyy-MM-dd")) {
                     const postDate = format(new Date(dueDate), "yyyy-MM-dd");
                     const postTodoQuery = `
@@ -250,7 +250,7 @@ app.put("/todos/:todoId/", async (request, response) => {
                  category = '${category}', due_date = '${dueDate}' WHERE id = ${todoId};`;
 
                  await db.run(updateTodoQuery);
-                 response.send("Status updated")
+                 response.send("Status Updated")
             } else{
                 response.status(400);
                 response.send("Invalid Todo Status")
@@ -266,7 +266,7 @@ app.put("/todos/:todoId/", async (request, response) => {
                  category = '${category}', due_date = '${dueDate}' WHERE id = ${todoId};`;
 
                  await db.run(updateTodoQuery);
-                 response.send("Priority updated")
+                 response.send("Priority Updated")
             } else{
                 response.status(400);
                 response.send("Invalid Todo Priority")
@@ -295,11 +295,11 @@ app.put("/todos/:todoId/", async (request, response) => {
                  category = '${category}', due_date = '${dueDate}' WHERE id = ${todoId};`;
 
                  await db.run(updateTodoQuery);
-                 response.send("Category updated")
+                 response.send("Category Updated")
             } else{
                 response.status(400);
                 response.send("Invalid Todo Category")
-            };
+            }
             break; 
             
         case requestData.dueDate !== undefined:
@@ -312,11 +312,11 @@ app.put("/todos/:todoId/", async (request, response) => {
                  category = '${category}', due_date = '${newDate}' WHERE id = ${todoId};`;
 
                  await db.run(updateTodoQuery);
-                 response.send("Due Date updated")
+                 response.send("Due Date Updated")
             } else{
                 response.status(400);
                 response.send("Invalid Due Date")
-            };
+            }
             break; 
     }
 
